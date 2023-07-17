@@ -24,7 +24,10 @@
  
   <div id="max"></div>
 </div>
-
+<div>
+ 
+  <div id="sum"></div>
+</div>
 <div>
  
   <div id="tri"></div>
@@ -32,16 +35,17 @@
 
 <script>
   const entiers = [];
+  let s=0;
 
   function ajouter() {
     const inputNumber = document.getElementById('inputNumber');
     const valeur = parseInt(inputNumber.value);
-    if (!isNaN(valeur)) {
-      entiers.push(valeur);
-      inputNumber.value = '';
+    s+=valeur;
+    if (!isNaN(valeur)) { // test if valeur is not null
+      entiers.push(valeur); //add valeur into entiers
+      inputNumber.value = ''; 
       afficherTableau();
-      trouverMin();
-      trouverMax();
+    
       trier(); // Trie le tableau à chaque nouvel ajout
     }
   }
@@ -51,30 +55,14 @@
     tableauDiv.innerHTML = 'Tableau : ' + entiers.join(', ');
   }
 
-  function trouverMin() {
-    const minDiv = document.getElementById('min');
-    if (entiers.length > 0) {
-      const min = Math.min(...entiers);
-      minDiv.innerHTML = 'Min : ' + min;
-    } else {
-      minDiv.innerHTML = 'Min : ';
-    }
-  }
-
-  function trouverMax() {
-    const maxDiv = document.getElementById('max');
-    if (entiers.length > 0) {
-      const max = Math.max(...entiers);
-      maxDiv.innerHTML = 'Max : ' + max;
-    } else {
-      maxDiv.innerHTML = 'Max : ';
-    }
-  }
-
+  
   function trier() {
     const triEntiers = [...entiers]; // Copie du tableau original pour ne pas le modifier
     triEntiers.sort((a, b) => a - b);
     afficherTri(triEntiers);
+    document.getElementById('min').innerHTML= 'max : ' + triEntiers[0];
+    document.getElementById('max').innerHTML= 'max : ' + triEntiers[triEntiers.length -1];
+    document.getElementById('sum').innerHTML= 'sum : ' + s;
   }
 
   function afficherTri(triEntiers) {
@@ -85,6 +73,7 @@
       triDiv.innerHTML = 'Tri : ';
     }
   }
+
 </script>
 
 </body>
