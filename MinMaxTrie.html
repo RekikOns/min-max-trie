@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tableau d'entiers</title>
+</head>
+<body style="text-align: center;">
+
+<h1>Tableau d'entiers</h1>
+
+<input type="number" id="inputNumber" placeholder="Entrez un entier">
+<button onclick="ajouter()">Ajouter</button>
+
+<div>
+  
+  <div id="tableau"></div>
+</div>
+
+<div>
+  
+  <div id="min"></div>
+</div>
+
+<div>
+ 
+  <div id="max"></div>
+</div>
+
+<div>
+ 
+  <div id="tri"></div>
+</div>
+
+<script>
+  const entiers = [];
+
+  function ajouter() {
+    const inputNumber = document.getElementById('inputNumber');
+    const valeur = parseInt(inputNumber.value);
+    if (!isNaN(valeur)) {
+      entiers.push(valeur);
+      inputNumber.value = '';
+      afficherTableau();
+      trouverMin();
+      trouverMax();
+      trier(); // Trie le tableau à chaque nouvel ajout
+    }
+  }
+
+  function afficherTableau() {
+    const tableauDiv = document.getElementById('tableau');
+    tableauDiv.innerHTML = 'Tableau : ' + entiers.join(', ');
+  }
+
+  function trouverMin() {
+    const minDiv = document.getElementById('min');
+    if (entiers.length > 0) {
+      const min = Math.min(...entiers);
+      minDiv.innerHTML = 'Min : ' + min;
+    } else {
+      minDiv.innerHTML = 'Min : ';
+    }
+  }
+
+  function trouverMax() {
+    const maxDiv = document.getElementById('max');
+    if (entiers.length > 0) {
+      const max = Math.max(...entiers);
+      maxDiv.innerHTML = 'Max : ' + max;
+    } else {
+      maxDiv.innerHTML = 'Max : ';
+    }
+  }
+
+  function trier() {
+    const triEntiers = [...entiers]; // Copie du tableau original pour ne pas le modifier
+    triEntiers.sort((a, b) => a - b);
+    afficherTri(triEntiers);
+  }
+
+  function afficherTri(triEntiers) {
+    const triDiv = document.getElementById('tri');
+    if (triEntiers.length > 0) {
+      triDiv.innerHTML = 'Tri : ' + triEntiers.join(', ');
+    } else {
+      triDiv.innerHTML = 'Tri : ';
+    }
+  }
+</script>
+
+</body>
+</html>
